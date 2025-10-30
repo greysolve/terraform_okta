@@ -1,16 +1,16 @@
-# actions.tf
 resource "auth0_action" "user_provisioning" {
   name    = "user-provisioning"
   runtime = "node18"
-  trigger {
-    id = "post-login"
+  deploy  = true
+
+  supported_triggers {
+    id      = "post-login"
+    version = "v3"
   }
-  
+
   code = <<-EOT
     exports.onExecutePostLogin = async (event, api) => {
-      // SCIM-like provisioning logic
-      if (event.user.app_metadata.needs_provisioning) {
-        // Add user to external system
+      if (!event.user.app_metadata || !event.user.app_metadata.provisioned) {
         api.user.setAppMetadata("provisioned", true);
       }
     };

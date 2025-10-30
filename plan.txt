@@ -1,0 +1,274 @@
+[0m[33mRunning plan in HCP Terraform. Output will stream here. Pressing Ctrl-C
+will stop streaming the logs, but will not stop the plan running remotely.[0m
+
+Preparing the remote plan...
+[0m
+[0m[33mTo view this run in a browser, visit:[0m
+[0m[33mhttps://app.terraform.io/app/greysolve/auth0-scim-learning/runs/run-P9NDeo3DnYnsyZqz[0m
+[0m
+Waiting for the plan to start...
+
+Terraform v1.13.4
+on linux_amd64
+Initializing plugins and modules...
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # auth0_action.user_provisioning[0m will be created
+[0m  [32m+[0m[0m resource "auth0_action" "user_provisioning" {
+      [32m+[0m[0m code       = <<-EOT
+            exports.onExecutePostLogin = async (event, api) => {
+              if (!event.user.app_metadata || !event.user.app_metadata.provisioned) {
+                api.user.setAppMetadata("provisioned", true);
+              }
+            };
+        EOT
+      [32m+[0m[0m deploy     = true
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m name       = "user-provisioning"
+      [32m+[0m[0m runtime    = "node18"
+      [32m+[0m[0m version_id = (known after apply)
+
+      [32m+[0m[0m supported_triggers {
+          [32m+[0m[0m id      = "post-login"
+          [32m+[0m[0m version = "v3"
+        }
+    }
+
+[1m  # auth0_client.scim_app[0m will be created
+[0m  [32m+[0m[0m resource "auth0_client" "scim_app" {
+      [32m+[0m[0m app_type                            = "regular_web"
+      [32m+[0m[0m callbacks                           = [
+          [32m+[0m[0m "https://example.com/callback",
+        ]
+      [32m+[0m[0m client_id                           = (known after apply)
+      [32m+[0m[0m custom_login_page_on                = (known after apply)
+      [32m+[0m[0m description                         = "App with SCIM-like provisioning"
+      [32m+[0m[0m grant_types                         = (known after apply)
+      [32m+[0m[0m id                                  = (known after apply)
+      [32m+[0m[0m is_first_party                      = (known after apply)
+      [32m+[0m[0m is_token_endpoint_ip_header_trusted = (known after apply)
+      [32m+[0m[0m name                                = "SCIM Test App"
+      [32m+[0m[0m oidc_backchannel_logout_urls        = (known after apply)
+      [32m+[0m[0m oidc_conformant                     = (known after apply)
+      [32m+[0m[0m signing_keys                        = (sensitive value)
+
+      [32m+[0m[0m default_organization (known after apply)
+
+      [32m+[0m[0m jwt_configuration {
+          [32m+[0m[0m alg                 = "RS256"
+          [32m+[0m[0m lifetime_in_seconds = (known after apply)
+          [32m+[0m[0m secret_encoded      = (known after apply)
+        }
+
+      [32m+[0m[0m mobile (known after apply)
+
+      [32m+[0m[0m native_social_login (known after apply)
+
+      [32m+[0m[0m oidc_logout (known after apply)
+
+      [32m+[0m[0m refresh_token (known after apply)
+    }
+
+[1m  # auth0_client.terraform_test[0m will be created
+[0m  [32m+[0m[0m resource "auth0_client" "terraform_test" {
+      [32m+[0m[0m app_type                            = "regular_web"
+      [32m+[0m[0m callbacks                           = [
+          [32m+[0m[0m "http://localhost:3000/callback",
+        ]
+      [32m+[0m[0m client_id                           = (known after apply)
+      [32m+[0m[0m custom_login_page_on                = (known after apply)
+      [32m+[0m[0m description                         = "Testing Terraform Cloud integration"
+      [32m+[0m[0m grant_types                         = [
+          [32m+[0m[0m "authorization_code",
+          [32m+[0m[0m "refresh_token",
+        ]
+      [32m+[0m[0m id                                  = (known after apply)
+      [32m+[0m[0m is_first_party                      = (known after apply)
+      [32m+[0m[0m is_token_endpoint_ip_header_trusted = (known after apply)
+      [32m+[0m[0m name                                = "Terraform Test App"
+      [32m+[0m[0m oidc_backchannel_logout_urls        = (known after apply)
+      [32m+[0m[0m oidc_conformant                     = (known after apply)
+      [32m+[0m[0m signing_keys                        = (sensitive value)
+
+      [32m+[0m[0m default_organization (known after apply)
+
+      [32m+[0m[0m jwt_configuration (known after apply)
+
+      [32m+[0m[0m mobile (known after apply)
+
+      [32m+[0m[0m native_social_login (known after apply)
+
+      [32m+[0m[0m oidc_logout (known after apply)
+
+      [32m+[0m[0m refresh_token (known after apply)
+    }
+
+[1m  # auth0_connection.enterprise[0m will be created
+[0m  [32m+[0m[0m resource "auth0_connection" "enterprise" {
+      [32m+[0m[0m display_name         = (known after apply)
+      [32m+[0m[0m id                   = (known after apply)
+      [32m+[0m[0m is_domain_connection = (known after apply)
+      [32m+[0m[0m name                 = "enterprise-saml"
+      [32m+[0m[0m realms               = (known after apply)
+      [32m+[0m[0m strategy             = "samlp"
+
+      [32m+[0m[0m authentication (known after apply)
+
+      [32m+[0m[0m connected_accounts (known after apply)
+
+      [32m+[0m[0m options {
+          [32m+[0m[0m allowed_audiences        = (known after apply)
+          [32m+[0m[0m authorization_endpoint   = (known after apply)
+          [32m+[0m[0m domain_aliases           = (known after apply)
+          [32m+[0m[0m ips                      = (known after apply)
+          [32m+[0m[0m issuer                   = (known after apply)
+          [32m+[0m[0m jwks_uri                 = (known after apply)
+          [32m+[0m[0m map_user_id_to_id        = (known after apply)
+          [32m+[0m[0m non_persistent_attrs     = (known after apply)
+          [32m+[0m[0m password_policy          = (known after apply)
+          [32m+[0m[0m protocol_binding         = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+          [32m+[0m[0m scopes                   = (known after apply)
+          [32m+[0m[0m set_user_root_attributes = (known after apply)
+          [32m+[0m[0m sign_in_endpoint         = "https://example.com/saml/login"
+          [32m+[0m[0m sign_out_endpoint        = (known after apply)
+          [32m+[0m[0m signing_cert             = <<-EOT
+                -----BEGIN CERTIFICATE-----
+                MIIDtTCCAp2gAwIBAgIUSrjWFJJUOAaHtFNnXjMMRskmpX8wDQYJKoZIhvcNAQEL
+                BQAwajELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVRleGFzMQ8wDQYDVQQHDAZEYWxs
+                YXMxEjAQBgNVBAoMCUdyZXlzb2x2ZTEMMAoGA1UECwwDSUFNMRgwFgYDVQQDDA9n
+                cmV5c29sdmUubG9jYWwwHhcNMjUxMDMwMTk0MTM0WhcNMjYxMDMwMTk0MTM0WjBq
+                MQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVGV4YXMxDzANBgNVBAcMBkRhbGxhczES
+                MBAGA1UECgwJR3JleXNvbHZlMQwwCgYDVQQLDANJQU0xGDAWBgNVBAMMD2dyZXlz
+                b2x2ZS5sb2NhbDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAOna1Hvw
+                SZfcNYOLH0xsVgSQB0+0MJ1nUHbvY/E/7557Wz614uR1DSabXD6B/V+p5nJ48fUw
+                1vAcuuMqpECz3hAwJa54CSA/KLRpdf6ZNMDnCiDii4y4HaZBJ+b+0SY3Q0m0Oeca
+                SFzlbCjpctbD+fpX8tWgTSEu3z3WsMPa2zFJJKB9L2ZX9L5S+nrp7+AomrtA8Lmr
+                QXmVCos3aKsuHpBYggKLUNo6igTu7pCq32FQQBAGT8FuLD7KY13Gd+n1t9mFEY/8
+                e+6Aicb72+p7ZRA08uB6UF8RS2vC4L17b+j2ezMyD2tLCyDTI7AHQEk7G4T5cMW8
+                WPFzIAl8yZ+m1wsCAwEAAaNTMFEwHQYDVR0OBBYEFO5ZRT/cUluBynSbLX2RZ2jh
+                hDc8MB8GA1UdIwQYMBaAFO5ZRT/cUluBynSbLX2RZ2jhhDc8MA8GA1UdEwEB/wQF
+                MAMBAf8wDQYJKoZIhvcNAQELBQADggEBABaKjtNB2Pbvtooj5wNvLBzUhjvOZXDy
+                qy59wI3qBWg4I81HyGP/8RfP1HS5BND49MIgBGagVT557XdGG4tDm2xqXDMiyXh0
+                OurkIXo9m+gRVZb33wcqjhOAuxTFa+A1ybMD05KtNVS50HaT7TUhl4EY7QrYcbF5
+                m1EPK5RjvvZa/9DAHc8Pqh8SJqQ1Y+5zVIRhn9k/UJHHIs39kjWML96yfwbUJpsL
+                aNcW6WOb8zKaHIxuhBCtBDfvJkb6kPWIFxK7gzGECWlKisyhwlBf/aJMeCWJC4M9
+                O8tAz899NCCdsapYI/DVWQpZ6ltMZ+BUVqJKnjFdPM47xz4YUmCmBcY=
+                -----END CERTIFICATE-----
+            EOT
+          [32m+[0m[0m strategy_version         = (known after apply)
+          [32m+[0m[0m token_endpoint           = (known after apply)
+          [32m+[0m[0m user_id_attribute        = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+          [32m+[0m[0m userinfo_endpoint        = (known after apply)
+
+          [32m+[0m[0m attribute_map (known after apply)
+
+          [32m+[0m[0m authentication_methods (known after apply)
+
+          [32m+[0m[0m connection_settings (known after apply)
+
+          [32m+[0m[0m mfa (known after apply)
+
+          [32m+[0m[0m passkey_options (known after apply)
+
+          [32m+[0m[0m password_complexity_options (known after apply)
+
+          [32m+[0m[0m password_dictionary (known after apply)
+
+          [32m+[0m[0m password_history (known after apply)
+
+          [32m+[0m[0m password_no_personal_info (known after apply)
+        }
+    }
+
+[1m  # auth0_connection.scim[0m will be created
+[0m  [32m+[0m[0m resource "auth0_connection" "scim" {
+      [32m+[0m[0m display_name         = (known after apply)
+      [32m+[0m[0m id                   = (known after apply)
+      [32m+[0m[0m is_domain_connection = (known after apply)
+      [32m+[0m[0m name                 = "SCIM-Connection"
+      [32m+[0m[0m realms               = (known after apply)
+      [32m+[0m[0m strategy             = "auth0"
+
+      [32m+[0m[0m authentication (known after apply)
+
+      [32m+[0m[0m connected_accounts (known after apply)
+
+      [32m+[0m[0m options {
+          [32m+[0m[0m allowed_audiences        = (known after apply)
+          [32m+[0m[0m authorization_endpoint   = (known after apply)
+          [32m+[0m[0m brute_force_protection   = true
+          [32m+[0m[0m disable_signup           = false
+          [32m+[0m[0m domain_aliases           = (known after apply)
+          [32m+[0m[0m import_mode              = false
+          [32m+[0m[0m ips                      = (known after apply)
+          [32m+[0m[0m issuer                   = (known after apply)
+          [32m+[0m[0m jwks_uri                 = (known after apply)
+          [32m+[0m[0m map_user_id_to_id        = (known after apply)
+          [32m+[0m[0m non_persistent_attrs     = (known after apply)
+          [32m+[0m[0m password_policy          = "good"
+          [32m+[0m[0m requires_username        = false
+          [32m+[0m[0m scopes                   = (known after apply)
+          [32m+[0m[0m set_user_root_attributes = (known after apply)
+          [32m+[0m[0m sign_in_endpoint         = (known after apply)
+          [32m+[0m[0m sign_out_endpoint        = (known after apply)
+          [32m+[0m[0m signing_cert             = (known after apply)
+          [32m+[0m[0m strategy_version         = (known after apply)
+          [32m+[0m[0m token_endpoint           = (known after apply)
+          [32m+[0m[0m userinfo_endpoint        = (known after apply)
+
+          [32m+[0m[0m attribute_map (known after apply)
+
+          [32m+[0m[0m authentication_methods (known after apply)
+
+          [32m+[0m[0m connection_settings (known after apply)
+
+          [32m+[0m[0m mfa (known after apply)
+
+          [32m+[0m[0m passkey_options (known after apply)
+
+          [32m+[0m[0m password_complexity_options (known after apply)
+
+          [32m+[0m[0m password_dictionary (known after apply)
+
+          [32m+[0m[0m password_history (known after apply)
+
+          [32m+[0m[0m password_no_personal_info (known after apply)
+        }
+    }
+
+[1m  # auth0_organization.my_org[0m will be created
+[0m  [32m+[0m[0m resource "auth0_organization" "my_org" {
+      [32m+[0m[0m display_name = "Test Organization"
+      [32m+[0m[0m id           = (known after apply)
+      [32m+[0m[0m name         = "test-org"
+
+      [32m+[0m[0m branding (known after apply)
+    }
+
+[1m  # auth0_user.test_user[0m will be created
+[0m  [32m+[0m[0m resource "auth0_user" "test_user" {
+      [32m+[0m[0m connection_name = "Username-Password-Authentication"
+      [32m+[0m[0m email           = "test@example.com"
+      [32m+[0m[0m email_verified  = true
+      [32m+[0m[0m id              = (known after apply)
+      [32m+[0m[0m name            = (known after apply)
+      [32m+[0m[0m nickname        = (known after apply)
+      [32m+[0m[0m password        = (sensitive value)
+      [32m+[0m[0m picture         = (known after apply)
+      [32m+[0m[0m user_id         = (known after apply)
+    }
+
+[1mPlan:[0m 7 to add, 0 to change, 0 to destroy.
+[0m
+Changes to Outputs:
+  [32m+[0m[0m client_id = (sensitive value)
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
